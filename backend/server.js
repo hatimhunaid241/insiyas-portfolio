@@ -16,6 +16,11 @@ app.use(
 connectDB();
 
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Server is working!");
+});
+
 app.use("/api/authentication", authenticationRoutes);
 
 // Server Status route

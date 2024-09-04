@@ -1,0 +1,4 @@
+{
+  "watch": ["server.js", "other-files-or-directories"],
+  "ext": "js,json"
+}

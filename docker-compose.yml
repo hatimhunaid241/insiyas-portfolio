@@ -1,0 +1,52 @@
+name: insiyas-portfolio
+version: '2.15'
+services:
+  backend:
+    build: ./backend
+    container_name: backend_container
+    ports: 
+      - "5000:5000"
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - insiyas-portfolio
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
+    hostname: insiyasportfolio
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+    networks:
+      - insiyas-portfolio
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx_container
+    ports:
+      - "80:80" 
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - insiyas-portfolio
+
+volumes:
+  frontend:
+  backend:
+
+networks:
+  insiyas-portfolio:
+    driver: bridge
