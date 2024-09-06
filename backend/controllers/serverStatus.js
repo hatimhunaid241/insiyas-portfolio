@@ -24,6 +24,7 @@ const getServerStatus = async (req, res) => {
     "user-agent": userAgentStatus,
     host: hostStatus,
   });
+  console.log
 };
 
 module.exports = { getServerStatus };
